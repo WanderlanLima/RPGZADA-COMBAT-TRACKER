@@ -4,5 +4,4 @@ import { defineConfig } from 'vite'
     // https://vitejs.dev/config/
     export default defineConfig({
       plugins: [react()],
-      base: '/rpgzada_combat_tracker_eqv5zk/',
     })
