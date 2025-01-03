@@ -1,7 +1,8 @@
 import React from 'react';
     import { IoImageOutline } from 'react-icons/io5';
+    import FileUpload from './FileUpload';
 
-    const CharacterForm = ({ newCharacter, handleInputChange, handleImageUpload, errorMessage, npcQuantity, setNpcQuantity, handleAddCharacter }) => {
+    const CharacterForm = ({ newCharacter, handleInputChange, handleImageUpload, errorMessage, npcQuantity, setNpcQuantity, handleAddCharacter, handleTextFileUpload }) => {
       return (
         <div className="w-full md:w-1/3 p-4 border-b md:border-r md:border-b-0 border-gray-700 flex flex-col">
           <h2 className="text-xl font-bold mb-4">Adicionar Personagem</h2>
@@ -68,6 +69,7 @@ import React from 'react';
               Adicionar Personagem
             </button>
           </div>
+          <FileUpload handleTextFileUpload={handleTextFileUpload} />
         </div>
       );
     };

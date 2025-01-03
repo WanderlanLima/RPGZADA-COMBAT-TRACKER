@@ -86,6 +86,65 @@ import { useState, useMemo } from 'react';
         setCharacters(characters.map(char => ({ ...char, initiative: 0 })));
       };
 
+      const handleTextFileUpload = (file) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const text = event.target.result;
+          const lines = text.split('\n').filter(line => line.trim() !== '');
+          let newCharacters = [];
+          for (const line of lines) {
+            const parts = line.split(',').map(item => item.trim());
+            const name = parts[0] || 'No Name';
+            let type = 'Jogador';
+            let modifier = 0;
+            let quantity = 1;
+
+            if (parts[1]) {
+              if (parts[1].toLowerCase() === 'pl') {
+                type = 'Jogador';
+                modifier = parseInt(parts[1]) || 0;
+                if (parts[2] && !isNaN(parseInt(parts[2]))) {
+                  modifier = parseInt(parts[2]) || 0;
+                }
+              } else if (parts[1].toLowerCase() === 'npc') {
+                type = 'NPC';
+                if (parts[2] && !isNaN(parseInt(parts[2]))) {
+                  quantity = parseInt(parts[2]);
+                  modifier = parseInt(parts[3]) || 0;
+                } else if (parts[2] && isNaN(parseInt(parts[2]))) {
+                  modifier = parseInt(parts[2]) || 0;
+                }
+              } else {
+                modifier = parseInt(parts[1]) || 0;
+              }
+            }
+            if (type === 'NPC') {
+              for (let i = 0; i < quantity; i++) {
+                newCharacters.push({
+                  id: nanoid(),
+                  name: name ? `${name} ${i + 1}` : `NPC ${i + 1}`,
+                  type: 'NPC',
+                  modifier: modifier,
+                  initiative: 0,
+                  image: null,
+                });
+              }
+            } else {
+              newCharacters.push({
+                id: nanoid(),
+                name: name,
+                type: 'Jogador',
+                modifier: modifier,
+                initiative: 0,
+                image: null,
+              });
+            }
+          }
+          setCharacters(prevCharacters => [...prevCharacters, ...newCharacters]);
+        };
+        reader.readAsText(file);
+      };
+
       const sortedCharacters = useMemo(() => {
         return [...characters].sort((a, b) => b.initiative - a.initiative);
       }, [characters]);
@@ -107,6 +166,7 @@ import { useState, useMemo } from 'react';
         handleResetInitiatives,
         sortedCharacters,
         setCharacters,
+        handleTextFileUpload,
       };
     };
 

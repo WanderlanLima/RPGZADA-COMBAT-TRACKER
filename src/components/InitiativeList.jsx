@@ -17,7 +17,12 @@ import React, { useRef } from 'react';
       return (
         <div className="w-full md:w-2/3 p-4 flex flex-col">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Lista de Iniciativas</h2>
+            <div className="flex items-center">
+              <h2 className="text-xl font-bold mr-2">Lista de Iniciativas</h2>
+              <button onClick={handleResetInitiatives} className="text-gray-400 hover:text-white text-xl" title="Resetar Iniciativas">
+                <FaRedoAlt />
+              </button>
+            </div>
             <div className="flex items-center relative" ref={dropdownRef}>
               <button onClick={handleRollAll} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mr-0">
                 ROLAR INICIATIVAS

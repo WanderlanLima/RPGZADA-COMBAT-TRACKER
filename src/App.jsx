@@ -7,6 +7,7 @@ import React, { useState, useRef, useEffect } from 'react';
     import useCharacterManager from './hooks/useCharacterManager';
     import Footer from './components/Footer';
     import ThemeToggleButton from './components/ThemeToggleButton';
+    import FileUpload from './components/FileUpload';
 
     function App() {
       const {
@@ -26,6 +27,7 @@ import React, { useState, useRef, useEffect } from 'react';
         handleResetInitiatives,
         sortedCharacters,
         setCharacters,
+        handleTextFileUpload,
       } = useCharacterManager();
 
       const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -93,6 +95,7 @@ import React, { useState, useRef, useEffect } from 'react';
               npcQuantity={npcQuantity}
               setNpcQuantity={setNpcQuantity}
               handleAddCharacter={handleAddCharacter}
+              handleTextFileUpload={handleTextFileUpload}
             />
             <InitiativeList
               sortedCharacters={sortedCharacters}
@@ -111,11 +114,6 @@ import React, { useState, useRef, useEffect } from 'react';
             <button onClick={handleClearAll} className="text-gray-400 hover:text-white text-xl" title="Limpar todos os dados">
               <IoTrash />
             </button>
-            <div className="flex items-center">
-              <button onClick={handleResetInitiatives} className="text-gray-400 hover:text-white text-xl mr-2" title="Resetar Iniciativas">
-                <FaRedoAlt />
-              </button>
-            </div>
           </div>
           <Footer
             repoUrl={repoUrl}
