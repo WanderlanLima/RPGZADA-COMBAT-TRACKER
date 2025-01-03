@@ -15,10 +15,10 @@ import React, { useRef } from 'react';
       dropdownRef
     }) => {
       return (
-        <div className="w-full md:w-2/3 p-6 flex flex-col">
+        <div className="w-full md:w-2/3 p-4 flex flex-col">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Lista de Iniciativa</h2>
-            <div className="flex items-center" ref={dropdownRef}>
+            <h2 className="text-xl font-bold">Lista de Iniciativas</h2>
+            <div className="flex items-center relative" ref={dropdownRef}>
               <button onClick={handleRollAll} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mr-0">
                 ROLAR INICIATIVAS
               </button>
@@ -29,7 +29,7 @@ import React, { useRef } from 'react';
                   <IoCaretDown className="text-lg"/>
                 </button>
                 {dropdownOpen && (
-                  <div className="absolute top-10 right-0 bg-gray-700 rounded shadow-md z-10">
+                  <div className="absolute top-full right-0 mt-1 bg-gray-700 rounded shadow-md z-10">
                     <button onClick={() => handleRollAllInitiatives('SOMENTE NPCS')} className="block w-full text-left py-2 px-4 hover:bg-gray-600">SOMENTE NPCS</button>
                     <button onClick={() => handleRollAllInitiatives('SOMENTE JOGADORES')} className="block w-full text-left py-2 px-4 hover:bg-gray-600">SOMENTE JOGADORES</button>
                   </div>
@@ -64,7 +64,6 @@ import React, { useRef } from 'react';
             ))}
           </ul>
           <div className="mt-4 flex justify-start">
-            <button onClick={handleResetInitiatives} className="text-gray-400 hover:text-white text-xl"><FaRedoAlt /></button>
           </div>
         </div>
       );

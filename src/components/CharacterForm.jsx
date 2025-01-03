@@ -3,9 +3,9 @@ import React from 'react';
 
     const CharacterForm = ({ newCharacter, handleInputChange, handleImageUpload, errorMessage, npcQuantity, setNpcQuantity, handleAddCharacter }) => {
       return (
-        <div className="w-full md:w-1/3 p-6 border-r border-gray-700 flex flex-col">
+        <div className="w-full md:w-1/3 p-4 border-b md:border-r md:border-b-0 border-gray-700 flex flex-col">
           <h2 className="text-xl font-bold mb-4">Adicionar Personagem</h2>
-          <div className="mb-4">
+          <div className="mb-2">
             <label className="block text-sm mb-1">Nome do Personagem</label>
             <input
               type="text"
@@ -17,7 +17,7 @@ import React from 'react';
             />
             {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <label className="block text-sm mb-1">Tipo do Personagem</label>
             <select
               name="type"
@@ -30,7 +30,7 @@ import React from 'react';
             </select>
           </div>
           {newCharacter.type === 'NPC' && (
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-sm mb-1">Quantidade de NPCs</label>
               <input
                 type="number"
@@ -42,7 +42,7 @@ import React from 'react';
               />
             </div>
           )}
-          <div className="mb-4">
+          <div className="mb-2">
             <label className="block text-sm mb-1">Modificador de Iniciativa</label>
             <input
               type="number"
@@ -53,7 +53,7 @@ import React from 'react';
               className="w-full p-2 rounded text-gray-800 bg-white border border-gray-400"
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             {newCharacter.image && (
               <div className="w-24 h-24 rounded mb-2 overflow-hidden">
                 <img src={newCharacter.image} alt="Character Preview" className="w-full h-full object-cover" />

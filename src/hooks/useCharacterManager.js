@@ -106,6 +106,7 @@ import { useState, useMemo } from 'react';
         handleDeleteCharacter,
         handleResetInitiatives,
         sortedCharacters,
+        setCharacters,
       };
     };
 

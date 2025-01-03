@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-    import { FaSun, FaMoon } from 'react-icons/fa';
+    import { FaSun, FaMoon, FaGithub, FaRedoAlt } from 'react-icons/fa';
     import { IoTrash } from 'react-icons/io5';
     import CharacterForm from './components/CharacterForm';
     import InitiativeList from './components/InitiativeList';
     import ClearConfirmation from './components/ClearConfirmation';
     import useCharacterManager from './hooks/useCharacterManager';
+    import Footer from './components/Footer';
+    import ThemeToggleButton from './components/ThemeToggleButton';
 
     function App() {
       const {
@@ -23,12 +25,18 @@ import React, { useState, useRef, useEffect } from 'react';
         handleDeleteCharacter,
         handleResetInitiatives,
         sortedCharacters,
+        setCharacters,
       } = useCharacterManager();
 
       const [dropdownOpen, setDropdownOpen] = useState(false);
       const dropdownRef = useRef(null);
       const [theme, setTheme] = useState('dark');
       const [showConfirmation, setShowConfirmation] = useState(false);
+      const [showRepoConfirmation, setShowRepoConfirmation] = useState(false);
+      const repoUrl = "https://github.com/WanderlanLima/RPGZADA-COMBAT-TRACKER";
+      const projectVersion = "1.1";
+      const startYear = 2024;
+      const currentYear = new Date().getFullYear();
 
       useEffect(() => {
         localStorage.setItem('theme', theme);
@@ -56,45 +64,83 @@ import React, { useState, useRef, useEffect } from 'react';
         setShowConfirmation(false);
       };
 
+      const handleRepoClick = () => {
+        setShowRepoConfirmation(true);
+      };
+
+      const confirmRepoNavigation = () => {
+        window.open(repoUrl, '_blank');
+        setShowRepoConfirmation(false);
+      };
+
+      const cancelRepoNavigation = () => {
+        setShowRepoConfirmation(false);
+      };
+
       return (
-        <div className={`flex h-screen  ${theme === 'dark' ? 'bg-dark-navy text-white' : 'bg-gray-100 text-gray-800'} font-sans`} onClick={(e) => {
+        <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'bg-dark-navy text-white' : 'bg-gray-100 text-gray-800'} font-sans`} onClick={(e) => {
           if (dropdownOpen && !dropdownRef.current?.contains(e.target)) {
             setDropdownOpen(false);
           }
         }}>
-          <CharacterForm
-            newCharacter={newCharacter}
-            handleInputChange={handleInputChange}
-            handleImageUpload={handleImageUpload}
-            errorMessage={errorMessage}
-            npcQuantity={npcQuantity}
-            setNpcQuantity={setNpcQuantity}
-            handleAddCharacter={handleAddCharacter}
+          <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
+          <div className="flex flex-col md:flex-row flex-grow">
+            <CharacterForm
+              newCharacter={newCharacter}
+              handleInputChange={handleInputChange}
+              handleImageUpload={handleImageUpload}
+              errorMessage={errorMessage}
+              npcQuantity={npcQuantity}
+              setNpcQuantity={setNpcQuantity}
+              handleAddCharacter={handleAddCharacter}
+            />
+            <InitiativeList
+              sortedCharacters={sortedCharacters}
+              theme={theme}
+              handleRollInitiative={handleRollInitiative}
+              handleDeleteCharacter={handleDeleteCharacter}
+              handleResetInitiatives={handleResetInitiatives}
+              handleRollAll={handleRollAll}
+              dropdownOpen={dropdownOpen}
+              toggleDropdown={toggleDropdown}
+              handleRollAllInitiatives={handleRollAllInitiatives}
+              dropdownRef={dropdownRef}
+            />
+          </div>
+          <div className="flex justify-between items-center p-4">
+            <button onClick={handleClearAll} className="text-gray-400 hover:text-white text-xl" title="Limpar todos os dados">
+              <IoTrash />
+            </button>
+            <div className="flex items-center">
+              <button onClick={handleResetInitiatives} className="text-gray-400 hover:text-white text-xl mr-2" title="Resetar Iniciativas">
+                <FaRedoAlt />
+              </button>
+            </div>
+          </div>
+          <Footer
+            repoUrl={repoUrl}
+            projectVersion={projectVersion}
+            startYear={startYear}
+            currentYear={currentYear}
+            handleRepoClick={handleRepoClick}
           />
-          <InitiativeList
-            sortedCharacters={sortedCharacters}
-            theme={theme}
-            handleRollInitiative={handleRollInitiative}
-            handleDeleteCharacter={handleDeleteCharacter}
-            handleResetInitiatives={handleResetInitiatives}
-            handleRollAll={handleRollAll}
-            dropdownOpen={dropdownOpen}
-            toggleDropdown={toggleDropdown}
-            handleRollAllInitiatives={handleRollAllInitiatives}
-            dropdownRef={dropdownRef}
-          />
-          <button onClick={handleClearAll} className="absolute bottom-4 left-4 text-gray-400 hover:text-white text-xl">
-            <IoTrash />
-          </button>
           <ClearConfirmation
             showConfirmation={showConfirmation}
             confirmClearAll={confirmClearAll}
             cancelClearAll={cancelClearAll}
             theme={theme}
           />
-          <button onClick={toggleTheme} className={`absolute bottom-4 right-4 text-gray-400 hover:text-white text-xl ${theme === 'dark' ? 'mr-2' : 'mr-0'}`}>
-            {theme === 'dark' ? <FaSun /> : <FaMoon />}
-          </button>
+          {showRepoConfirmation && (
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-md">
+                <p className="mb-4 dark:text-white">Deseja realmente ir para a página do repositório?</p>
+                <div className="flex justify-end">
+                  <button onClick={cancelRepoNavigation} className="bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-800 dark:text-white py-2 px-4 rounded mr-2">Cancelar</button>
+                  <button onClick={confirmRepoNavigation} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       );
     }
