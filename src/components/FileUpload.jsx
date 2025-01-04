@@ -40,8 +40,8 @@ import React, { useState, useRef, useEffect } from 'react';
       }, [showInstructions]);
 
       return (
-        <div className="mb-2 relative">
-          <label htmlFor="file-upload" className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded mt-2 cursor-pointer block text-center">
+        <div className="mb-3 relative">
+          <label htmlFor="file-upload" className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded mt-2 cursor-pointer block text-center">
             Carregar Personagens (.txt)
           </label>
           <input

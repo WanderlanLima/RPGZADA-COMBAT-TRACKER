@@ -1,15 +1,26 @@
-import React, { useState, useRef, useEffect } from 'react';
-    import { FaSun, FaMoon, FaGithub, FaRedoAlt } from 'react-icons/fa';
-    import { IoTrash } from 'react-icons/io5';
-    import CharacterForm from './components/CharacterForm';
-    import InitiativeList from './components/InitiativeList';
-    import ClearConfirmation from './components/ClearConfirmation';
-    import useCharacterManager from './hooks/useCharacterManager';
-    import Footer from './components/Footer';
-    import ThemeToggleButton from './components/ThemeToggleButton';
-    import FileUpload from './components/FileUpload';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
+
+// Icons
+import { FaSun, FaMoon, FaGithub, FaRedoAlt } from 'react-icons/fa';
+import { IoTrash } from 'react-icons/io5';
+
+// Components
+import CharacterForm from './components/CharacterForm';
+import InitiativeList from './components/InitiativeList';
+import ClearConfirmation from './components/ClearConfirmation';
+import Footer from './components/Footer';
+import ThemeToggleButton from './components/ThemeToggleButton';
+import FileUpload from './components/FileUpload';
+
+// Hooks
+import useCharacterManager from './hooks/useCharacterManager';
 
     function App() {
+      // Prop types validation
+      App.propTypes = {
+        // Add prop types if needed
+      };
       const {
         characters,
         newCharacter,
@@ -45,83 +56,112 @@ import React, { useState, useRef, useEffect } from 'react';
         document.documentElement.classList.toggle('dark', theme === 'dark');
       }, [theme]);
 
-      const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
-      };
+      useEffect(() => {
+        document.documentElement.lang = 'pt-BR';
+      }, []);
 
-      const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
-      };
+      // Memoized and callback functions
+      const toggleDropdown = useCallback(() => {
+        setDropdownOpen(prev => !prev);
+      }, []);
 
-      const handleClearAll = () => {
+      const toggleTheme = useCallback(() => {
+        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+      }, []);
+
+      const handleClearAll = useCallback(() => {
         setShowConfirmation(true);
-      };
+      }, []);
 
-      const confirmClearAll = () => {
-        setCharacters([]);
+      const confirmClearAll = useCallback(() => {
+        try {
+          setCharacters([]);
+          setShowConfirmation(false);
+        } catch (error) {
+          console.error('Error clearing characters:', error);
+          setErrorMessage('Failed to clear characters');
+        }
+      }, [setCharacters, setErrorMessage]);
+
+      const cancelClearAll = useCallback(() => {
         setShowConfirmation(false);
-      };
+      }, []);
 
-      const cancelClearAll = () => {
-        setShowConfirmation(false);
-      };
-
-      const handleRepoClick = () => {
+      const handleRepoClick = useCallback(() => {
         setShowRepoConfirmation(true);
-      };
+      }, []);
 
-      const confirmRepoNavigation = () => {
-        window.open(repoUrl, '_blank');
-        setShowRepoConfirmation(false);
-      };
+      const confirmRepoNavigation = useCallback(() => {
+        try {
+          window.open(repoUrl, '_blank');
+          setShowRepoConfirmation(false);
+        } catch (error) {
+          console.error('Error opening repository:', error);
+          setErrorMessage('Failed to open repository');
+        }
+      }, [repoUrl]);
 
-      const cancelRepoNavigation = () => {
+      const cancelRepoNavigation = useCallback(() => {
         setShowRepoConfirmation(false);
-      };
+      }, []);
+
+      // Memoized values
+      const headerStyle = useMemo(() => ({
+        background: 'linear-gradient(to right, #1a1130, #4e2a6b, #1a1130)'
+      }), []);
+
+      const mainClasses = useMemo(() => (
+        `min-h-screen flex flex-col ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-800'} font-sans`
+      ), [theme]);
 
       return (
-        <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'bg-dark-navy text-white' : 'bg-gray-100 text-gray-800'} font-sans`} onClick={(e) => {
-          if (dropdownOpen && !dropdownRef.current?.contains(e.target)) {
-            setDropdownOpen(false);
-          }
-        }}>
-          <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
-          <div className="flex flex-col md:flex-row flex-grow">
-            <CharacterForm
-              newCharacter={newCharacter}
-              handleInputChange={handleInputChange}
-              handleImageUpload={handleImageUpload}
-              errorMessage={errorMessage}
-              npcQuantity={npcQuantity}
-              setNpcQuantity={setNpcQuantity}
-              handleAddCharacter={handleAddCharacter}
-              handleTextFileUpload={handleTextFileUpload}
-            />
-            <InitiativeList
-              sortedCharacters={sortedCharacters}
-              theme={theme}
-              handleRollInitiative={handleRollInitiative}
-              handleDeleteCharacter={handleDeleteCharacter}
-              handleResetInitiatives={handleResetInitiatives}
-              handleRollAll={handleRollAll}
-              dropdownOpen={dropdownOpen}
-              toggleDropdown={toggleDropdown}
-              handleRollAllInitiatives={handleRollAllInitiatives}
-              dropdownRef={dropdownRef}
-            />
+        <div className={`min-h-screen flex flex-col ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-800'} font-sans`}>
+          <header className="p-4 flex justify-between items-center" style={{ background: 'linear-gradient(to right, #1a1130, #4e2a6b, #1a1130)' }}>
+            <h1 className="text-2xl font-bold text-white">RPG Initiative Tracker</h1>
+            <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
+          </header>
+          <div className="container mx-auto p-4 flex flex-col md:flex-row flex-grow">
+            <aside className="md:w-1/3 p-4">
+              <CharacterForm
+                newCharacter={newCharacter}
+                handleInputChange={handleInputChange}
+                handleImageUpload={handleImageUpload}
+                errorMessage={errorMessage}
+                npcQuantity={npcQuantity}
+                setNpcQuantity={setNpcQuantity}
+                handleAddCharacter={handleAddCharacter}
+                handleTextFileUpload={handleTextFileUpload}
+              />
+            </aside>
+            <main className="md:w-2/3 p-4">
+              <InitiativeList
+                sortedCharacters={sortedCharacters}
+                theme={theme}
+                handleRollInitiative={handleRollInitiative}
+                handleDeleteCharacter={handleDeleteCharacter}
+                handleResetInitiatives={handleResetInitiatives}
+                handleRollAll={handleRollAll}
+                dropdownOpen={dropdownOpen}
+                toggleDropdown={toggleDropdown}
+                handleRollAllInitiatives={handleRollAllInitiatives}
+                dropdownRef={dropdownRef}
+              />
+            </main>
           </div>
-          <div className="flex justify-between items-center p-4">
+          <div className="flex justify-start p-4">
             <button onClick={handleClearAll} className="text-gray-400 hover:text-white text-xl" title="Limpar todos os dados">
               <IoTrash />
             </button>
           </div>
-          <Footer
-            repoUrl={repoUrl}
-            projectVersion={projectVersion}
-            startYear={startYear}
-            currentYear={currentYear}
-            handleRepoClick={handleRepoClick}
-          />
+          <footer className="bg-gray-800 dark:bg-gray-700 py-2 flex justify-center items-center mt-auto">
+            <Footer
+              repoUrl={repoUrl}
+              projectVersion={projectVersion}
+              startYear={startYear}
+              currentYear={currentYear}
+              handleRepoClick={handleRepoClick}
+            />
+          </footer>
           <ClearConfirmation
             showConfirmation={showConfirmation}
             confirmClearAll={confirmClearAll}
