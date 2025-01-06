@@ -1,3 +1,62 @@
 @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(140, 60, 244, 0.4), 0 0 0 2px rgba(140, 60, 244, 1);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(140, 60, 244, 0), 0 0 0 2px rgba(140, 60, 244, 1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(140, 60, 244, 0), 0 0 0 2px rgba(140, 60, 244, 1);
+  }
+}
+
+@keyframes purple-rainbow {
+  0% {
+    border-image: linear-gradient(
+      90deg,
+      #8c3cf4,
+      #7a2be2,
+      #6828d1,
+      #5625c0
+    ) 1;
+  }
+  50% {
+    border-image: linear-gradient(
+      90deg,
+      #5625c0,
+      #6828d1,
+      #7a2be2,
+      #8c3cf4
+    ) 1;
+  }
+  100% {
+    border-image: linear-gradient(
+      90deg,
+      #8c3cf4,
+      #7a2be2,
+      #6828d1,
+      #5625c0
+    ) 1;
+  }
+}
+
+.pulsing-border {
+  animation: pulse-border 1.5s infinite, purple-rainbow 3s linear infinite;
+  border: 2px solid;
+  border-image-slice: 1;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-right: 2px solid;
+}
+
+.condition-selected {
+  border: 2px solid #8c3cf4;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 2px;
+  background-color: rgba(140, 60, 244, 0.1);
+}

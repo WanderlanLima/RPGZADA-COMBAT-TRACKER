@@ -1,10 +1,44 @@
 import React from 'react';
     import { IoImageOutline } from 'react-icons/io5';
     import FileUpload from './FileUpload';
+    import { IoTrash } from 'react-icons/io5';
 
-    const CharacterForm = ({ newCharacter, handleInputChange, handleImageUpload, errorMessage, npcQuantity, setNpcQuantity, handleAddCharacter, handleTextFileUpload }) => {
+    const CharacterForm = ({ newCharacter, handleInputChange, handleImageUpload, errorMessage, npcQuantity, setNpcQuantity, handleAddCharacter, handleTextFileUpload, handleClearAll, characters, setCharacters }) => {
+      const handleModifierFocus = (e) => {
+        if (e.target.value === '0') {
+          e.target.value = '';
+          handleInputChange(e);
+        }
+      };
+
+      const handleModifierBlur = (e) => {
+        if (e.target.value === '') {
+          e.target.value = '0';
+          handleInputChange(e);
+        }
+      };
+
+      const handleNpcQuantityFocus = (e) => {
+        if (e.target.value === '1') {
+          e.target.value = '';
+          setNpcQuantity('');
+        }
+      };
+
+      const handleNpcQuantityBlur = (e) => {
+        if (e.target.value === '') {
+          e.target.value = '1';
+          setNpcQuantity(1);
+        }
+      };
+
+      const inputStyle = {
+        backgroundColor: 'rgb(56,68,84)',
+        color: 'white',
+      };
+
       return (
-        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow-md">
+        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow-md relative">
           <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">Adicionar Personagem</h2>
           <div className="mb-3">
             <label className="block text-sm mb-1 text-gray-700 dark:text-gray-300">Nome do Personagem</label>
@@ -14,7 +48,8 @@ import React from 'react';
               value={newCharacter.name}
               onChange={handleInputChange}
               placeholder="Nome"
-              className="w-full p-2 rounded text-gray-800 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+              className="w-full p-2 rounded border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+              style={inputStyle}
             />
             {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}
           </div>
@@ -38,6 +73,8 @@ import React from 'react';
                 name="npcQuantity"
                 value={npcQuantity}
                 onChange={(e) => setNpcQuantity(parseInt(e.target.value, 10))}
+                onFocus={handleNpcQuantityFocus}
+                onBlur={handleNpcQuantityBlur}
                 placeholder="1"
                 className="w-full p-2 rounded text-gray-800 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
               />
@@ -50,8 +87,11 @@ import React from 'react';
               name="modifier"
               value={newCharacter.modifier}
               onChange={handleInputChange}
+              onFocus={handleModifierFocus}
+              onBlur={handleModifierBlur}
               placeholder="0"
               className="w-full p-2 rounded text-gray-800 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none appearance-none"
+              style={inputStyle}
             />
           </div>
           <div className="mb-3">
@@ -62,7 +102,7 @@ import React from 'react';
             )}
             <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" id="image-upload" />
             <label htmlFor="image-upload" className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded cursor-pointer block text-center flex items-center justify-center">
-              <IoImageOutline className="mr-2" />
+              <IoImageOutline className="mr-2 dark:text-white text-gray-800" />
               Escolher Imagem
             </label>
             <button onClick={handleAddCharacter} className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded mt-2">
@@ -70,6 +110,15 @@ import React from 'react';
             </button>
           </div>
           <FileUpload handleTextFileUpload={handleTextFileUpload} />
+          <div className="flex justify-start mt-4">
+            <button 
+              onClick={handleClearAll} 
+              className="text-gray-400 hover:text-white text-xl flex items-center" 
+              title="Limpar todos os dados"
+            >
+              <IoTrash />
+            </button>
+          </div>
         </div>
       );
     };
