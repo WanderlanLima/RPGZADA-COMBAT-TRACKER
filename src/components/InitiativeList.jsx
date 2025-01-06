@@ -369,37 +369,40 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
                     
                     {/* Damage Controls */}
                     {battleStarted && (
-                      <div className="flex flex-row space-x-2 mt-1">
-                        <button 
-                          onClick={() => openEditModal(character.id, 'damage')}
-                          className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                        >
-                          <GiCrossedSwords className="text-red-500" />
-                          <span>Dano: {character.damage || 0}</span>
-                        </button>
+                      <div className="flex flex-col md:flex-row gap-2 mt-1">
+                        <div className="flex gap-2">
+                          <button 
+                            onClick={() => openEditModal(character.id, 'damage')}
+                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
+                          >
+                            <GiCrossedSwords className="text-red-500" />
+                            <span>Dano: {character.damage || 0}</span>
+                          </button>
 
-                        <button 
-                          onClick={() => openEditModal(character.id, 'healing')}
-                          className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                        >
-                          <FaHeart className="text-green-500" />
-                          <span>Cura: {character.healing || 0}</span>
-                        </button>
-
-                        <button 
-                          onClick={() => openEditModal(character.id, 'tempHp')}
-                          className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                        >
-                          <FaShieldAlt className="text-blue-400" />
-                          <span>Vida Temp: {character.tempHp || 0}</span>
-                        </button>
-                        <button 
-                          onClick={() => handleOpenConditionsModal(character.id)}
-                          className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                        >
-                          <GiCrossedSwords className="text-yellow-500" />
-                          <span>Condições</span>
-                        </button>
+                          <button 
+                            onClick={() => openEditModal(character.id, 'healing')}
+                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
+                          >
+                            <FaHeart className="text-green-500" />
+                            <span>Cura: {character.healing || 0}</span>
+                          </button>
+                        </div>
+                        <div className="flex gap-2">
+                          <button 
+                            onClick={() => openEditModal(character.id, 'tempHp')}
+                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
+                          >
+                            <FaShieldAlt className="text-blue-400" />
+                            <span>Vida Temp: {character.tempHp || 0}</span>
+                          </button>
+                          <button 
+                            onClick={() => handleOpenConditionsModal(character.id)}
+                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
+                          >
+                            <GiCrossedSwords className="text-yellow-500" />
+                            <span>Condições</span>
+                          </button>
+                        </div>
                       </div>
                     )}
 
