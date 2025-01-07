@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-    import { FaDiceD20, FaRedoAlt, FaHeart, FaShieldAlt } from 'react-icons/fa';
-    import { IoTrashOutline, IoPersonOutline, IoCaretDown } from 'react-icons/io5';
-    import { GiCrossedSwords } from 'react-icons/gi';
-    import { BsArrowRight, BsPlus, BsDash } from 'react-icons/bs';
-    import ConfirmationModal from './ConfirmationModal';
-    import ResetConfirmationModal from './ResetConfirmationModal';
-    import InitiativeInputModal from './InitiativeInputModal';
-    import ConditionsModal from './ConditionsModal';
+import { FaDiceD20, FaRedoAlt, FaHeart, FaShieldAlt } from 'react-icons/fa';
+import { IoTrashOutline, IoPersonOutline, IoCaretDown } from 'react-icons/io5';
+import { GiCrossedSwords } from 'react-icons/gi';
+import { BsArrowRight, BsPlus, BsDash } from 'react-icons/bs';
+import ConfirmationModal from './ConfirmationModal';
+import ResetConfirmationModal from './ResetConfirmationModal';
+import InitiativeInputModal from './InitiativeInputModal';
+import ConditionsModal from './ConditionsModal';
 
-    const InitiativeList = ({
+const InitiativeList = ({
       sortedCharacters,
       theme,
       handleRollInitiative,
@@ -278,55 +278,79 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 
       return (
         <div className={`bg-gray-100 dark:bg-gray-800 p-4 rounded shadow-md`}>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-2 md:space-y-0">
             <div className="flex items-center">
               <h2 className="text-xl font-bold mr-2 text-gray-800 dark:text-white">Lista de Iniciativa</h2>
               {!battleStarted && (
-                <button onClick={handleOpenResetConfirmation} className="text-gray-400 hover:text-white text-xl" title="Resetar Iniciativas">
+                <button 
+                  onClick={handleOpenResetConfirmation} 
+                  className="text-gray-400 hover:text-white text-xl touch:active-scale" 
+                  title="Resetar Iniciativas"
+                  aria-label="Resetar Iniciativas"
+                >
                   <FaRedoAlt />
                 </button>
               )}
             </div>
             <div className="flex items-center relative" ref={dropdownRef}>
               {showBattleButton && !battleStarted && (
-                <button onClick={handleRollAllAndSetBattle} className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mr-2 flex items-center">
+                <button 
+                  onClick={handleRollAllAndSetBattle} 
+                  className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg mr-2 flex items-center touch:active-scale"
+                >
                   <GiCrossedSwords className="mr-2" />
-                  Iniciar batalha
+                  <span className="text-base">Iniciar batalha</span>
                 </button>
               )}
               {battleStarted && (
                 <button 
                   onClick={handleNextTurn} 
-                  className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded mr-0 flex items-center fixed bottom-4 right-4 md:static z-50" 
+                  className="bg-purple-500 hover:bg-purple-600 text-white py-3 px-6 rounded-lg flex items-center fixed bottom-4 right-4 md:static z-50 touch:active-scale" 
                   style={{ backgroundColor: 'rgb(60,36,92)' }}
                 >
-                  Próximo Turno
+                  <span className="text-base">Próximo Turno</span>
                   <BsArrowRight className="ml-2" />
                 </button>
               )}
               {!battleStarted && (
-                <button onClick={handleRollAll} className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded mr-2">
-                  Rolar Iniciativas
+                <button 
+                  onClick={handleRollAll} 
+                  className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-lg mr-2 touch:active-scale"
+                >
+                  <span className="text-base">Rolar Iniciativas</span>
                 </button>
               )}
               {!battleStarted && (
-                <button onClick={toggleDropdown} className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-2 rounded h-full flex items-center">
+                <button 
+                  onClick={toggleDropdown} 
+                  className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-2 rounded-lg h-full flex items-center touch:active-scale"
+                >
                   <IoCaretDown className="text-lg" />
                 </button>
               )}
               {dropdownOpen && !battleStarted && (
-                <div className="absolute top-full right-0 mt-1 bg-gray-700 rounded shadow-md z-10">
-                  <button onClick={() => handleRollAllInitiatives('SOMENTE NPCS')} className="block w-full text-left py-2 px-4 hover:bg-gray-600">SOMENTE NPCS</button>
-                  <button onClick={() => handleRollAllInitiatives('SOMENTE JOGADORES')} className="block w-full text-left py-2 px-4 hover:bg-gray-600">SOMENTE JOGADORES</button>
+                <div className="absolute top-full right-0 mt-1 bg-gray-700 rounded-lg shadow-md z-10">
+                  <button 
+                    onClick={() => handleRollAllInitiatives('SOMENTE NPCS')} 
+                    className="block w-full text-left py-2 px-4 hover:bg-gray-600 text-base"
+                  >
+                    SOMENTE NPCS
+                  </button>
+                  <button 
+                    onClick={() => handleRollAllInitiatives('SOMENTE JOGADORES')} 
+                    className="block w-full text-left py-2 px-4 hover:bg-gray-600 text-base"
+                  >
+                    SOMENTE JOGADORES
+                  </button>
                 </div>
               )}
             </div>
           </div>
-          <ul className="space-y-2 flex-grow overflow-y-auto">
+          <ul className="space-y-2 flex-grow overflow-y-auto pb-16 md:pb-0">
             {sortedCharacters.map((character, index) => (
-              <li key={character.id} className={`p-4 rounded flex items-center justify-between ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} ${battleStarted && index === currentTurnIndex ? 'pulsing-border' : ''}`}>
-                <div className="flex items-center flex-col md:flex-row">
-                  <div className="w-16 h-16 mr-2 overflow-hidden rounded-full relative border-2 border-purple-500">
+              <li key={character.id} className={`p-4 rounded flex flex-col md:flex-row items-center justify-between ${theme === 'dark' ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} ${battleStarted && index === currentTurnIndex ? 'pulsing-border' : ''}`}>
+                <div className="flex items-center flex-col md:flex-row w-full">
+                  <div className="w-16 h-16 mr-2 overflow-hidden rounded-full relative border-2 border-purple-500 flex-shrink-0">
                     <input
                       type="file"
                       accept="image/*"
@@ -350,18 +374,19 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
                         src={character.image} 
                         alt="Character" 
                         className="object-cover w-full h-full" 
+                        loading="lazy"
                       />
                     ) : (
                       <label 
                         htmlFor={`image-upload-${character.id}`}
-                        className="w-full h-full flex items-center justify-center rounded-full bg-gray-600 dark:bg-gray-700 cursor-pointer hover:bg-gray-500"
+                        className="w-full h-full flex items-center justify-center rounded-full bg-gray-600 dark:bg-gray-700 cursor-pointer hover:bg-gray-500 touch:active-scale"
                       >
                         <IoPersonOutline className={`text-4xl ${theme === 'dark' ? 'text-gray-400' : 'text-gray-100'}`} />
                       </label>
                     )}
                   </div>
-                  <div>
-                    <div className="font-bold text-gray-800 dark:text-white">{character.name}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-gray-800 dark:text-white truncate">{character.name}</div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">{character.type}</div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
                       {battleStarted ? `Iniciativa: ${character.initiative}` : `Modificador: ${character.modifier >= 0 ? '+' : ''}${character.modifier}`}
@@ -369,40 +394,38 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
                     
                     {/* Damage Controls */}
                     {battleStarted && (
-                      <div className="flex flex-col md:flex-row gap-2 mt-1">
-                        <div className="flex gap-2">
-                          <button 
-                            onClick={() => openEditModal(character.id, 'damage')}
-                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                          >
-                            <GiCrossedSwords className="text-red-500" />
-                            <span>Dano: {character.damage || 0}</span>
-                          </button>
+                      <div className="grid grid-cols-2 gap-2 mt-2">
+                        <button 
+                          onClick={() => openEditModal(character.id, 'damage')}
+                          className="flex items-center space-x-2 p-2 rounded-lg bg-gray-600 hover:bg-gray-500 touch:active-scale"
+                        >
+                          <GiCrossedSwords className="text-red-500" />
+                          <span className="text-sm">Dano: {character.damage || 0}</span>
+                        </button>
 
-                          <button 
-                            onClick={() => openEditModal(character.id, 'healing')}
-                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                          >
-                            <FaHeart className="text-green-500" />
-                            <span>Cura: {character.healing || 0}</span>
-                          </button>
-                        </div>
-                        <div className="flex gap-2">
-                          <button 
-                            onClick={() => openEditModal(character.id, 'tempHp')}
-                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                          >
-                            <FaShieldAlt className="text-blue-400" />
-                            <span>Vida Temp: {character.tempHp || 0}</span>
-                          </button>
-                          <button 
-                            onClick={() => handleOpenConditionsModal(character.id)}
-                            className="flex items-center space-x-2 p-2 rounded bg-gray-600 hover:bg-gray-500"
-                          >
-                            <GiCrossedSwords className="text-yellow-500" />
-                            <span>Condições</span>
-                          </button>
-                        </div>
+                        <button 
+                          onClick={() => openEditModal(character.id, 'healing')}
+                          className="flex items-center space-x-2 p-2 rounded-lg bg-gray-600 hover:bg-gray-500 touch:active-scale"
+                        >
+                          <FaHeart className="text-green-500" />
+                          <span className="text-sm">Cura: {character.healing || 0}</span>
+                        </button>
+
+                        <button 
+                          onClick={() => openEditModal(character.id, 'tempHp')}
+                          className="flex items-center space-x-2 p-2 rounded-lg bg-gray-600 hover:bg-gray-500 touch:active-scale"
+                        >
+                          <FaShieldAlt className="text-blue-400" />
+                          <span className="text-sm">Vida Temp: {character.tempHp || 0}</span>
+                        </button>
+
+                        <button 
+                          onClick={() => handleOpenConditionsModal(character.id)}
+                          className="flex items-center space-x-2 p-2 rounded-lg bg-gray-600 hover:bg-gray-500 touch:active-scale"
+                        >
+                          <GiCrossedSwords className="text-yellow-500" />
+                          <span className="text-sm">Condições</span>
+                        </button>
                       </div>
                     )}
 
