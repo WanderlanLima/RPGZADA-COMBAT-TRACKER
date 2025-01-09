@@ -1,0 +1,80 @@
+/* Efeitos gamer */
+.gamer-bg-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.gamer-bg {
+  background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+  border: 1px solid #444;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.gamer-button {
+  background: linear-gradient(145deg, #6e45e2, #4a2c8f);
+  border: 1px solid #7a5de8;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.gamer-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.gamer-button-active {
+  background: linear-gradient(145deg, #ff416c, #ff4b2b);
+  border-color: #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+/* Efeito de morte */
+.death-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.tombstone {
+  position: relative;
+  width: 100px;
+  height: 120px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><rect x="10" y="0" width="80" height="100" fill="%23aaa" rx="10"/><rect x="30" y="10" width="40" height="20" fill="%23777" rx="5"/><text x="50" y="70" font-size="30" fill="%23000" text-anchor="middle">RIP</text></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.skull {
+  position: absolute;
+  bottom: -20px;
+  width: 30px;
+  height: 30px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23fff" d="M12 2a9 9 0 0 0-9 9c0 4.17 2.84 7.67 6.69 8.69L12 22l2.31-2.31C18.16 18.67 21 15.17 21 11a9 9 0 0 0-9-9m0 2a7 7 0 0 1 7 7c0 3.86-3.14 7-7 7s-7-3.14-7-7a7 7 0 0 1 7-7m-5 6v2h10v-2H7z"/></svg>');
+  background-size: contain;
+}
+
+/* Alinhamento dos ícones */
+.death-saves-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.death-saves-label {
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.death-saves-icons {
+  display: flex;
+  gap: 4px;
+}

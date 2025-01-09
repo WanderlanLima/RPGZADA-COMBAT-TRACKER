@@ -182,12 +182,18 @@ import { useState, useMemo, useEffect } from 'react';
               for (let i = 0; i < quantity; i++) {
                 newCharacters.push({
                   id: nanoid(),
-                  name: name ? `${name} ${i + 1}` : `NPC ${i + 1}`,
-                  type: 'NPC',
-                  modifier: modifier,
-                initiative: 0,
-                image: null,
-                needsRoll: false,
+              name: name ? `${name} ${i + 1}` : `NPC ${i + 1}`,
+              type: 'NPC',
+              modifier: modifier,
+              initiative: 0,
+              image: null,
+              needsRoll: false,
+              status: 'alive',
+              deathSaves: {
+                successes: 0,
+                failures: 0
+              },
+              deathAnimation: false
                 });
               }
             } else {
@@ -199,6 +205,7 @@ import { useState, useMemo, useEffect } from 'react';
                 initiative: 0,
                 image: null,
                 needsRoll: false,
+                status: 'alive'
               });
             }
           }
@@ -256,14 +263,22 @@ import { useState, useMemo, useEffect } from 'react';
         return [...existingCharacters, ...newCharacters].sort((a, b) => b.initiative - a.initiative);
       }, [characters, newCharactersAdded]);
 
-      const nextTurn = () => {
-        if (characters.length > 0) {
-          setCurrentTurnIndex((prevIndex) => {
-            const nextIndex = (prevIndex + 1) % characters.length;
-            return nextIndex;
-          });
-        }
-      };
+const nextTurn = () => {
+  if (characters.length > 0) {
+    setCurrentTurnIndex((prevIndex) => {
+      let nextIndex = (prevIndex + 1) % characters.length;
+      let attempts = 0;
+      
+      // Pula personagens mortos, mas evita loop infinito
+      while (characters[nextIndex]?.status === 'dead' && attempts < characters.length) {
+        nextIndex = (nextIndex + 1) % characters.length;
+        attempts++;
+      }
+      
+      return nextIndex;
+    });
+  }
+};
 
       const handleStartBattle = () => {
         setBattleStarted(true);

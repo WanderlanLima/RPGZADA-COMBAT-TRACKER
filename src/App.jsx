@@ -88,14 +88,9 @@ function App() {
                   handleAddCharacter={handleAddCharacter}
                   handleTextFileUpload={handleTextFileUpload}
                   handleClearAll={handleClearAll}
+                  setShowInstructions={setShowInstructions}
                 />
-                <button
-                  onClick={() => setShowInstructions(true)}
-                  className="absolute right-0 bottom-0 p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-                  title="Instruções de importação"
-                >
-                  <IoHelpCircleOutline className="w-6 h-6" />
-                </button>
+                
               </div>
               <div className="mt-4 flex space-x-2">
                 <div className="flex-1">

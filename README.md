@@ -1,83 +1,147 @@
-# Initiative Tracker
+# RPGZADA Combat Tracker
 
-    ## English Documentation
+## English Documentation
 
-    ### Overview
+### Overview
 
-    A simple web application to track initiative in tabletop role-playing games.
+A complete combat tracker for tabletop RPGs with initiative management, damage tracking, and condition monitoring.
 
-    ### Features
+### Features
 
-    -   **Add Characters:** Add player characters or NPCs with names, types, initiative modifiers, and images.
-    -   **Roll Initiative:** Roll initiative for individual characters or all characters at once.
-    -   **Sort Characters:** Characters are automatically sorted by initiative in descending order.
-    -   **Delete Characters:** Remove characters from the initiative list.
-    -   **Reset Initiatives:** Reset all character initiatives to zero.
-    -   **Dark/Light Theme:** Switch between dark and light themes for better viewing experience.
-    -   **Clear All:** Clear all characters from the initiative list.
-    -   **Roll Only NPCs or Players:** Roll initiative only for NPCs or only for players.
+- **Character Management:**
+  - Add player characters or NPCs with names, types, initiative modifiers
+  - Upload custom character images
+  - Edit character details and initiatives
+  - Delete characters
 
-    ### How to Use
+- **Initiative System:**
+  - Roll initiative for individual characters or groups
+  - Roll only for NPCs or Players
+  - Automatic sorting by initiative
+  - Manual initiative input
+  - Reset all initiatives
 
-    1.  **Add a Character:** Enter the character's name, select the type (Player or NPC), enter the initiative modifier, and optionally upload an image.
-    2.  **Roll Initiative:** Click the dice icon next to a character to roll their initiative. Click the "ROLL INITIATIVES" button to roll for all characters.
-    3.  **View Initiative Order:** The characters are automatically sorted by initiative.
-    4.  **Delete a Character:** Click the trash icon next to a character to remove them from the list.
-    5.  **Reset Initiatives:** Click the reset icon to set all initiatives to zero.
-    6.  **Switch Theme:** Click the sun/moon icon to switch between dark and light themes.
-    7.  **Clear All:** Click the trash icon at the bottom left to clear all characters.
-    8.  **Roll Only NPCs or Players:** Click the "ROLL INITIATIVES" button and select "SOMENTE NPCS" or "SOMENTE JOGADORES" to roll only for NPCs or players.
+- **Combat Tracking:**
+  - Damage and healing tracking
+  - Temporary HP management
+  - Condition tracking (Blinded, Poisoned, etc.)
+  - Next turn button with visual indicator
+  - Automatic scrolling to current turn
 
-    ### Technologies Used
+- **Customization:**
+  - Dark/Light theme toggle
+  - Customizable conditions list
+  - Responsive design for mobile and desktop
 
-    -   React
-    -   Vite
-    -   Tailwind CSS
-    -   React Icons
+- **Data Management:**
+  - Clear all characters
+  - Reset combat state
+  - Save/Load combat state
 
-    ### Contributing
+### How to Use
 
-    Feel free to contribute to the project by submitting pull requests or opening issues.
+1. **Add Characters:**
+   - Click the "+" button
+   - Fill character details (name, type, initiative modifier)
+   - Optionally upload an image
 
-    <br>
+2. **Manage Initiative:**
+   - Roll initiative for all characters or specific groups
+   - Manually edit initiatives by clicking the initiative value
+   - Reset initiatives when needed
 
-    # Rastreador de Iniciativa
+3. **Track Combat:**
+   - Click damage/healing buttons to modify character status
+   - Add/remove conditions from the conditions modal
+   - Use the next turn button to advance combat
+   - View current turn indicator and health status
 
-    ## Documentação em Português
+4. **Customize:**
+   - Switch between dark/light themes
+   - Add/remove conditions from the conditions list
 
-    ### Visão Geral
+### Technologies Used
 
-    Uma aplicação web simples para rastrear a iniciativa em jogos de RPG de mesa.
+- React
+- Vite
+- Tailwind CSS
+- React Icons
+- LocalStorage (for state persistence)
 
-    ### Funcionalidades
+---
 
-    -   **Adicionar Personagens:** Adicione personagens jogadores ou NPCs com nomes, tipos, modificadores de iniciativa e imagens.
-    -   **Rolar Iniciativa:** Role a iniciativa para personagens individuais ou todos os personagens de uma vez.
-    -   **Ordenar Personagens:** Os personagens são automaticamente ordenados por iniciativa em ordem decrescente.
-    -   **Deletar Personagens:** Remova personagens da lista de iniciativa.
-    -   **Resetar Iniciativas:** Redefina todas as iniciativas dos personagens para zero.
-    -   **Tema Escuro/Claro:** Alterne entre temas escuros e claros para uma melhor experiência de visualização.
-    -   **Limpar Tudo:** Limpe todos os personagens da lista de iniciativa.
-    -   **Rolar Apenas NPCs ou Jogadores:** Role a iniciativa apenas para NPCs ou apenas para jogadores.
+# RPGZADA Combat Tracker
 
-    ### Como Usar
+## Documentação em Português
 
-    1.  **Adicionar um Personagem:** Insira o nome do personagem, selecione o tipo (Jogador ou NPC), insira o modificador de iniciativa e, opcionalmente, carregue uma imagem.
-    2.  **Rolar Iniciativa:** Clique no ícone de dado ao lado de um personagem para rolar sua iniciativa. Clique no botão "ROLAR INICIATIVAS" para rolar para todos os personagens.
-    3.  **Ver Ordem de Iniciativa:** Os personagens são automaticamente ordenados por iniciativa.
-    4.  **Deletar um Personagem:** Clique no ícone de lixeira ao lado de um personagem para removê-lo da lista.
-    5.  **Resetar Iniciativas:** Clique no ícone de reset para definir todas as iniciativas como zero.
-    6.  **Mudar Tema:** Clique no ícone de sol/lua para alternar entre temas escuros e claros.
-    7.  **Limpar Tudo:** Clique no ícone de lixeira no canto inferior esquerdo para limpar todos os personagens.
-    8.  **Rolar Apenas NPCs ou Jogadores:** Clique no botão "ROLAR INICIATIVAS" e selecione "SOMENTE NPCS" ou "SOMENTE JOGADORES" para rolar apenas para NPCs ou jogadores.
+### Visão Geral
 
-    ### Tecnologias Utilizadas
+Um rastreador de combate completo para RPGs de mesa com gerenciamento de iniciativa, controle de danos e monitoramento de condições.
 
-    -   React
-    -   Vite
-    -   Tailwind CSS
-    -   React Icons
+### Funcionalidades
 
-    ### Contribuindo
+- **Gerenciamento de Personagens:**
+  - Adicionar personagens jogadores ou NPCs com nomes, tipos e modificadores de iniciativa
+  - Upload de imagens personalizadas
+  - Editar detalhes e iniciativas dos personagens
+  - Remover personagens
 
-    Sinta-se à vontade para contribuir com o projeto enviando pull requests ou abrindo issues.
+- **Sistema de Iniciativa:**
+  - Rolar iniciativa para personagens individuais ou grupos
+  - Rolar apenas para NPCs ou Jogadores
+  - Ordenação automática por iniciativa
+  - Inserção manual de iniciativa
+  - Resetar todas as iniciativas
+
+- **Controle de Combate:**
+  - Controle de dano e cura
+  - Gerenciamento de vida temporária
+  - Controle de condições (Cego, Envenenado, etc.)
+  - Botão de próximo turno com indicador visual
+  - Scroll automático para o turno atual
+
+- **Customização:**
+  - Alternar entre temas claro/escuro
+  - Lista de condições customizável
+  - Design responsivo para mobile e desktop
+
+- **Gerenciamento de Dados:**
+  - Limpar todos os personagens
+  - Resetar estado do combate
+  - Salvar/Carregar estado do combate
+
+### Como Usar
+
+1. **Adicionar Personagens:**
+   - Clique no botão "+"
+   - Preencha os detalhes do personagem (nome, tipo, modificador de iniciativa)
+   - Opcionalmente faça upload de uma imagem
+
+2. **Gerenciar Iniciativa:**
+   - Role iniciativa para todos os personagens ou grupos específicos
+   - Edite iniciativas manualmente clicando no valor da iniciativa
+   - Resetar iniciativas quando necessário
+
+3. **Controlar Combate:**
+   - Clique nos botões de dano/cura para modificar o status do personagem
+   - Adicione/remova condições através do modal de condições
+   - Use o botão de próximo turno para avançar o combate
+   - Veja o indicador de turno atual e status de vida
+
+4. **Customizar:**
+   - Alterne entre temas claro/escuro
+   - Adicione/remova condições da lista de condições
+
+### Tecnologias Utilizadas
+
+- React
+- Vite
+- Tailwind CSS
+- React Icons
+- LocalStorage (para persistência de estado)
+
+### Contributing/Contribuindo
+
+Feel free to contribute to the project by submitting pull requests or opening issues.
+
+Sinta-se à vontade para contribuir com o projeto enviando pull requests ou abrindo issues.
