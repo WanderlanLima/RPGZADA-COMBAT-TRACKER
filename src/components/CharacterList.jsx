@@ -28,15 +28,17 @@ const CharacterList = ({ characters, onRollInitiative }) => {
         </button>
       </div>
 
-      <div className="grid gap-4">
+      <div className="grid gap-4 px-4 sm:px-0">
         {filteredCharacters.map((character) => (
-          <div key={character.id} className="gamer-bg p-4 rounded-lg">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-medium text-white">{character.name}</h3>
+          <div key={character.id} className="gamer-bg p-4 rounded-lg w-full">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-medium text-white truncate">{character.name}</h3>
                 <p className="text-sm text-gray-400">{character.type}</p>
               </div>
-              <span className="text-white">{character.initiative || '-'}</span>
+              <span className="text-white text-lg sm:text-base font-medium px-3 py-1 sm:px-2 sm:py-0.5 bg-purple-900/50 rounded-full">
+                {character.initiative || '-'}
+              </span>
             </div>
           </div>
         ))}

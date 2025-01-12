@@ -43,11 +43,12 @@ module.exports = {
         'gray-200': '#e5e7eb',
         'gray-100': '#f3f4f6',
         'gray-50': '#f9fafb',
-        'purple-500': '#8b5cf6',
-        'purple-600': '#7c3aed',
-        'primary': '#8c3cf4',
-        'secondary': '#7a2be2',
-        'accent': '#6828d1',
+        'purple-500': '#9e6bc3',
+        'purple-600': '#8c59b0',
+        'primary': '#79489d',
+        'secondary': '#b17cd5',
+        'accent': '#c38de8',
+        'light-bg': '#eae0f0'
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in',

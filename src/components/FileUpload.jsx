@@ -5,16 +5,20 @@ const FileUpload = ({ handleTextFileUpload }) => {
   const [isUploading, setIsUploading] = useState(false);
 
   const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
     setIsUploading(true);
     try {
       await handleTextFileUpload(e);
     } finally {
       setIsUploading(false);
+      e.target.value = '';
     }
   };
 
   return (
-    <div className="mt-4">
+    <div className="relative">
       <input
         type="file"
         accept=".txt"
@@ -25,29 +29,23 @@ const FileUpload = ({ handleTextFileUpload }) => {
       />
       <label
         htmlFor="file-upload"
-        className={`bg-gray-700 hover:bg-gray-600 text-white py-3 px-6 rounded-lg cursor-pointer block text-center flex items-center justify-center touch:active-scale transition-all ${
-          isUploading ? 'opacity-75 cursor-wait' : ''
+        className={`flex items-center justify-center w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors ${
+          isUploading ? 'opacity-75 cursor-wait' : 'cursor-pointer'
         }`}
-        aria-label={isUploading ? 'Carregando...' : 'Importar Personagens'}
       >
         {isUploading ? (
           <FaSpinner className="mr-2 animate-spin" />
         ) : (
           <FaFileUpload className="mr-2" />
         )}
-        <span className="text-base">
-          {isUploading ? 'Carregando...' : 'Importar Personagens'}
-        </span>
+        <span>{isUploading ? 'Carregando...' : 'Importar Personagens'}</span>
       </label>
-      
-      {/* Feedback de sucesso/erro */}
-      <div className="mt-2 text-sm text-center">
-        {isUploading && (
-          <p className="text-gray-500 dark:text-gray-400">
-            Por favor, aguarde enquanto processamos o arquivo...
-          </p>
-        )}
-      </div>
+
+      {isUploading && (
+        <p className="mt-2 text-sm text-gray-400 text-center">
+          Processando arquivo...
+        </p>
+      )}
     </div>
   );
 };
