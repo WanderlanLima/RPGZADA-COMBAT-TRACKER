@@ -7,7 +7,6 @@ import { GiCrossedSwords, GiAnticlockwiseRotation, GiRollingDices } from 'react-
 import { BsArrowRight, BsPlus, BsDash } from 'react-icons/bs';
 import ConfirmationModal from './ConfirmationModal';
 import ConditionsModal from './ConditionsModal';
-import ResetConfirmationModal from './ResetConfirmationModal';
 import InitiativeInputModal from './InitiativeInputModal';
 import D20Button from './D20Button';
 

@@ -7,7 +7,6 @@ import Footer from './components/Footer';
 import useCharacterManager from './hooks/useCharacterManager';
 import useTheme from './hooks/useTheme';
 import ThemeToggleButton from './components/ThemeToggleButton';
-import ClearConfirmation from './components/ClearConfirmation';
 import { IoCloudUploadOutline, IoCloudDownloadOutline, IoHelpCircleOutline } from 'react-icons/io5';
 import SaveLogButton from './components/SaveLogButton';
 import LoadLogButton from './components/LoadLogButton';
@@ -42,7 +41,6 @@ function App() {
   } = useCharacterManager();
 
   const { theme, toggleTheme } = useTheme();
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const repoUrl = "https://github.com/WanderlanLima/RPGZADA-COMBAT-TRACKER";
   const projectVersion = "1.5";
@@ -52,18 +50,9 @@ function App() {
   const handleClearAll = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
-    setShowConfirmation(true);
-  }, []);
-
-  const confirmClearAll = useCallback(() => {
     clearAllCharacters();
-    setShowConfirmation(false);
     setBattleStarted(false);
   }, [clearAllCharacters, setBattleStarted]);
-
-  const cancelClearAll = useCallback(() => {
-    setShowConfirmation(false);
-  }, []);
 
   const handleRepoClick = useCallback(() => {
     window.open(repoUrl, '_blank');
@@ -189,12 +178,6 @@ Dragão, npc, 1, 4`}
           handleRepoClick={handleRepoClick}
         />
       </footer>
-      <ClearConfirmation
-        showConfirmation={showConfirmation}
-        confirmClearAll={confirmClearAll}
-        cancelClearAll={cancelClearAll}
-        theme={theme}
-      />
     </div>
   );
 }
