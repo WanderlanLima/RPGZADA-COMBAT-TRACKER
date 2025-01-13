@@ -15,8 +15,14 @@ const BuffInput = ({ character, onClose, onSubmit }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-1">
-      <div className="gamer-modal bg-gray-900 p-4 rounded-lg border-2 border-purple-800 shadow-xl w-full max-w-[300px]">
+    <div 
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backdropFilter: 'blur(4px)'
+      }}
+    >
+      <div className="gamer-modal bg-gray-900 p-4 rounded-lg border-2 border-purple-800 shadow-xl w-[90vw] max-w-[400px]">
         <h3 className="text-lg font-bold text-purple-400 font-gaming mb-3 hover:text-purple-300 transition-colors">
           Nome do Buff
         </h3>

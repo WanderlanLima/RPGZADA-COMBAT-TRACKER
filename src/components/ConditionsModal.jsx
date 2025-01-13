@@ -17,7 +17,7 @@ const ConditionsModal = ({
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-1">
-        <div className="gamer-modal bg-gray-900 p-4 rounded-lg border-2 border-purple-800 shadow-xl transform transition-all w-full max-w-[95vw] sm:max-w-[350px] md:max-w-[400px] overflow-y-auto max-h-[90vh] relative">
+        <div className="gamer-modal bg-gray-900 p-4 rounded-lg border-2 border-purple-800 shadow-xl transform transition-all w-full max-w-[960px] max-h-[540px] overflow-y-auto relative">
           
           {/* Close Button */}
           <button
