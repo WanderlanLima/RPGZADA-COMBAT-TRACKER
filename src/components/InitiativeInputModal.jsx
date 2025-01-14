@@ -30,6 +30,14 @@ const InitiativeInputModal = ({ showModal, handleCloseModal, handleConfirmChange
     setInitiative('');
   };
 
+  const rollInitiative = () => {
+    console.log('Rolando iniciativa...');
+    const roll = Math.floor(Math.random() * 20) + 1;
+    const total = roll + parseInt(character.modifier, 10);
+    console.log(`Resultado: ${total} (${roll} + ${character.modifier})`);
+    setInitiative(total.toString());
+  };
+
   if (!showModal || !character) return null;
 
   return (
@@ -39,15 +47,31 @@ const InitiativeInputModal = ({ showModal, handleCloseModal, handleConfirmChange
         <p className="mb-2">
           Iniciativa máxima: {maxInitiative}
         </p>
-        <input
-          type="number"
-          value={initiative}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
-          placeholder="Digite a iniciativa"
-          className="w-full p-2 rounded text-gray-800 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none mb-4"
-          ref={inputRef}
-        />
+        <div className="flex gap-2 mb-4">
+          <input
+            type="number"
+            value={initiative}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            placeholder="Digite a iniciativa"
+            className="w-full p-2 rounded text-gray-800 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+            ref={inputRef}
+          />
+          <button
+            onClick={rollInitiative}
+            className="bg-purple-500 hover:bg-purple-600 text-white px-4 rounded flex-shrink-0"
+            title="Rolar iniciativa"
+            style={{ 
+              minWidth: '42px',
+              height: '42px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            🎲
+          </button>
+        </div>
         <div className="flex justify-end">
           <button onClick={handleCloseModal} className="bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-800 dark:text-white py-2 px-4 rounded mr-2">Cancelar</button>
           <button onClick={handleConfirm} className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded">Confirmar</button>
