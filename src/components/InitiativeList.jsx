@@ -9,6 +9,7 @@ import ConfirmationModal from './ConfirmationModal';
 import ConditionsModal from './ConditionsModal';
 import InitiativeInputModal from './InitiativeInputModal';
 import D20Button from './D20Button';
+import DiceRoller from './DiceRoller.jsx';
 
 const InitiativeList = ({
   sortedCharacters,
@@ -1176,6 +1177,7 @@ const InitiativeList = ({
           </div>
         </div>
       )}
+      <DiceRoller isVisible={battleStarted} />
     </div>
   );
 };

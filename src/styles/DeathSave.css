@@ -1,0 +1,39 @@
+.death-save-container {
+  padding: 10px;
+}
+
+.death-save-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.death-save-group {
+  display: flex;
+  gap: 5px;
+}
+
+.death-save-icon {
+  cursor: pointer;
+  font-size: 24px;
+  opacity: 0.3;
+  transition: all 0.2s ease;
+  color: #666;
+}
+
+.death-save-icon.enabled {
+  opacity: 1;
+}
+
+.death-save-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Estilização específica para cada tipo de ícone */
+.fa-heart.enabled {
+  color: #e74c3c;
+}
+
+.fa-skull.enabled {
+  color: #2c3e50;
+}
