@@ -6,6 +6,10 @@
 
 A complete combat tracker for tabletop RPGs with initiative management, damage tracking, and condition monitoring.
 
+### Environment Setup
+
+Copy `.env.example` to `.env` and fill in the `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY` values with your Supabase project credentials.
+
 ### Features
 
 - **Character Management:**
